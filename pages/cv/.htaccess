@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Rediriger uniquement les soumissions POST depuis changemdp_exec.php
+RewriteCond %{REQUEST_METHOD} POST
+RewriteCond %{REQUEST_URI} ^/consulting/pages/cv/changemdp_exec\.php$
+RewriteRule ^(.*)$ /consulting/execution/cv/changemdp_exec.php [R=307,L]
+
+# Rediriger uniquement les soumissions POST depuis cree_exec.php
+RewriteCond %{REQUEST_METHOD} POST
+RewriteCond %{REQUEST_URI} ^/consulting/pages/cv/cree_exec\.php$
+RewriteRule ^(.*)$ /consulting/execution/cv/cree_exec.php [R=307,L]
+
+# Rediriger uniquement les soumissions POST depuis login.php
+RewriteCond %{REQUEST_METHOD} POST
+RewriteCond %{REQUEST_URI} ^/consulting/pages/cv/login\.php$
+RewriteRule ^(.*)$ /consulting/execution/cv/login.php [R=307,L]

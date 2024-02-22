@@ -1,0 +1,44 @@
+[12-Feb-2024 17:24:19 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to undefined function space() in C:\laragon\www\aire\index.php:147
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\index.php on line 147
+[20-Feb-2024 09:54:56 Africa/Nairobi] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: string + int in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:19
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 19
+[20-Feb-2024 09:55:01 Africa/Nairobi] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: string + int in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:19
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 19
+[20-Feb-2024 09:55:23 Africa/Nairobi] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: string + int in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:19
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 19
+[20-Feb-2024 10:04:59 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22
+[20-Feb-2024 10:05:20 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22
+[20-Feb-2024 10:06:06 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22
+[20-Feb-2024 10:07:27 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22
+[20-Feb-2024 10:08:42 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22
+[20-Feb-2024 10:09:03 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22
+[20-Feb-2024 10:09:08 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Call to a member function lireParCritere() on null in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php:22
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 22

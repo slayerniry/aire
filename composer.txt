@@ -1,0 +1,1 @@
+composer dump-autoload -> raha manovanova ps4 ny composer.json
