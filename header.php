@@ -21,17 +21,16 @@ loadRessource("fr");
     <script src="<?= HTTP_PAGE ?>js/aire.js"></script>
     <style type="text/css">
         @font-face {
-            font-family: 'Nunito Black';
-            src: url('<?= HTTP_FONT ?>Nunito-Black.ttf') format('truetype');
-            /* Spécifiez d'autres formats de police ici si nécessaire */
+            font-family: 'Bebas Neue';
+            src: url(<?= HTTP_FONT ?>'BebasNeue-Regular.ttf') format('truetype');
+            /* Ajoutez d'autres formats de fichiers de police si nécessaire */
         }
 
         @font-face {
-            font-family: 'Bebas Neue';
-            src: url('<?= HTTP_FONT ?>BebasNeue-Regular.ttf') format('truetype');
-            /* Ajoutez d'autres formats de police ici si nécessaire */
+            font-family: 'Nunito';
+            src: url(<?= HTTP_FONT ?>'Nunito-SemiBold.ttf') format('truetype');
+            /* Ajoutez d'autres formats de fichiers de police si nécessaire */
         }
-
 
         .nav-item {
             position: relative;

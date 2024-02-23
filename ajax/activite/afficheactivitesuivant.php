@@ -12,15 +12,15 @@ $limit = $_POST["limit"];
 
 $critere["id_type_event"]  = 3;
 
+$dataNBR = $t_event->lireParCritere($critere);
+
 if ($type == 0) { //precedent
     $limit = $limit - 1;
 
-    if ($limit == 0) {
-        $limit = 0;
+    if ($limit == -1) {
+        $limit = count($dataNBR) - 1 ;
     }
 } else { //suivant
-
-    $dataNBR = $t_event->lireParCritere($critere);
 
     if ($limit < count($dataNBR) - 1) {
         $limit = $limit + 1;

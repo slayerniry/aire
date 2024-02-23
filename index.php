@@ -2,6 +2,8 @@
 ?>
 
 <style>
+   
+
     .page-link i {
         color: #006633;
     }
@@ -58,7 +60,7 @@
 
         padding-top: 40px;
         padding-left: 40px;
-        font-size: 48pt;
+       /* font-size: 48pt;*/
 
         color: #006633;
     }
@@ -494,7 +496,7 @@
 
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    
                     <hr>
                     <p class="display-6">10 modules </p>
                     <p class="display-6">divided into 7 weekends</p>
