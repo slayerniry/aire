@@ -346,7 +346,7 @@
         </div>
     </div>
 </div>
-<div class="container" style="background-image: url('<?= HTTP_IMG ?>apres-domaine.jpg');background-size: cover;">
+<!--<div class="container" style="background-image: url('<?= HTTP_IMG ?>apres-domaine.jpg');background-size: cover;">
     <div class="row">
         <div class="col-md-6">
             <div class="h-100 p-5 text-white position-relative">
@@ -469,7 +469,7 @@
             iv>
         </div>
     </div>
-</div>
+</div>-->
 <?php require_once "footer.php"; ?>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
