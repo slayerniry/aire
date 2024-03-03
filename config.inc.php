@@ -2,7 +2,8 @@
 
 $tab_php_self = explode("/", $_SERVER['PHP_SELF']);
 
-define('RP_MAIN_CONF', $_SERVER["DOCUMENT_ROOT"] . "/" .  $tab_php_self[1] . "/");
+//define('RP_MAIN_CONF', $_SERVER["DOCUMENT_ROOT"] . '/aire/');
+define('RP_MAIN_CONF', $_SERVER["DOCUMENT_ROOT"] . '/aire/');
 
 define("CHAMP", "CC");
 

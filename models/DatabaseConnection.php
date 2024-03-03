@@ -72,7 +72,7 @@ class DatabaseConnection
             return $results;
         } catch (\Doctrine\DBAL\Exception $e) {
             // Gérer les erreurs d'exécution de la requête
-            die("Erreur d'exécution de la requête : " . $e->getMessage());
+            die("Erreur d'exécution de la requête : " . $e->getMessage() . "<br>" . $sql );
         }
     }
 

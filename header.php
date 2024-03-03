@@ -84,13 +84,13 @@ loadRessource("fr");
                         <li class="nav-item">
                             <a class="nav-link" href="#divaccueil"><?= _getText("menu.accueil") ?></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#divapropos"><?= _getText("a.propos") ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#divactivite"><?= _getText("activites") ?></a>
-                        </li>
-                        <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="#divapropos"><?= _getText("a.propos") ?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#divactivite"><?= _getText("activites") ?></a>
+                </li>
+                <li class="nav-item">
                             <a class="nav-link" href="#divcontact"><?= _getText("menu.contact") ?></a>
                         </li>
                     </ul>

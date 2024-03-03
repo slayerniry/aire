@@ -35,6 +35,7 @@ class t_event
             $sSQL .= " LIMIT " . $critere["limit"] . ",1 ";
 
 
+        
 
         $results =  $this->connect->execute_req_pdo($sSQL);
 

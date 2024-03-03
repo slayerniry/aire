@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../config.inc.php';
 // Récupérer les données POST
 $t_event  = new Models\t_event;
 
-$type = $_POST["type"];
+$type = $_POST["type"] ?? 1 ;
 $limit = $_POST["limit"];
 
 $critere["id_type_event"]  = 3;

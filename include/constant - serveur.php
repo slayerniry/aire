@@ -2,15 +2,15 @@
 
 
 define("DB_HOST", "localhost");
-define("DB_NAME", "aire");
-define("DB_USER", "root");
-define("DB_PWD", "root");
+define("DB_NAME", "airemg_aire");
+define("DB_USER", "airemg_aire");
+define("DB_PWD", "@1re.mg2024");
 
 
 define('RP_MAIN', RP_MAIN_CONF );
 define('ROOT_PATH', RP_MAIN_CONF );
 
-define('HTTP_MAIN', "http://" . $_SERVER["HTTP_HOST"] . "/aire/");
+define('HTTP_MAIN', "https://" . $_SERVER["HTTP_HOST"] . "/");
 
 define('HTTP_MAIN_MENU', HTTP_MAIN);
 
