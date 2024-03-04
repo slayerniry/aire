@@ -31,12 +31,19 @@ class t_event
 
         $sSQL .= " ORDER BY id_event DESC ";
 
-        if (isset($critere['limit']) && $critere['id_type_event'] != "")
-            $sSQL .= " LIMIT " . $critere["limit"] . ",1 ";
+        if (isset($critere['limit']) && $critere['id_type_event'] != "") {
 
+            if ($critere['id_type_event'] == "3") {
+                $sSQL .= " LIMIT " . $critere["limit"] . ",1 ";
+            }
 
-        
+            if ($critere['id_type_event'] == "4") {
 
+                $sSQL .= " LIMIT " . $critere["limit"] . ",4 ";
+            }
+        }
+
+      
         $results =  $this->connect->execute_req_pdo($sSQL);
 
         return $results;
