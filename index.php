@@ -425,7 +425,6 @@
         </div>
     </div>
     <div class="row" id="liste-team">
-        
     </div>
     <hr>
     <div class="row justify-content-center align-items-center g-2">
@@ -438,213 +437,245 @@
             </center>
         </div>
     </div>
-    <div class="container" style="padding-left: 25px;padding-right: 25px;">
-        <div class="row text-white" style="background-image: url('<?= HTTP_IMG ?>gris.jpg'); background-size: cover;">
-            <div class="col p-5">
-                <p class="display-6">HOW TO RECOVER FROM A HIKE</p>
-                <p class="display-6">15.09.20</p>
-            </div>
-            <div class="col p-5">
-                <div class="row">
-                    <div class="col">
-                        <p class="display-1">50%</p>
-                    </div>
-                    <div class="col">
-                        <p class="display-6">OFF</p>
-                    </div>
+</div>
+<div class="container" style="padding-left: 25px;padding-right: 25px;">
+    <div class="row text-white" style="background-image: url('<?= HTTP_IMG ?>gris.jpg'); background-size: cover;">
+        <div class="col p-5">
+            <p class="display-6">HOW TO RECOVER FROM A HIKE</p>
+            <p class="display-6">15.09.20</p>
+        </div>
+        <div class="col p-5">
+            <div class="row">
+                <div class="col">
+                    <p class="display-1">50%</p>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <p class="display-6">orem Ipsum Consectetur</p>
-                        <p class="display-6">15.30 hs</p>
-                    </div>
+                <div class="col">
+                    <p class="display-6">OFF</p>
                 </div>
-                <p class="display-6">21.09.20</p>
             </div>
+            <div class="row">
+                <div class="col">
+                    <p class="display-6">orem Ipsum Consectetur</p>
+                    <p class="display-6">15.30 hs</p>
+                </div>
+            </div>
+            <p class="display-6">21.09.20</p>
         </div>
     </div>
-    <div class="container" style="padding-left: 25px;padding-right: 25px;">
-        <div class="row text-white" style="background-image: url('<?= HTTP_IMG ?>violet.png'); background-size: cover;">
-            <div class="col p-5">
-                <p class="display-3 text-center">FOR CONSERVING AND RESTORING ECOSYSTEM</p>
-                <br><br><br><br>
-                <center>
-                    <button class="btn btn-see-more">Donate</button>
-                </center>
-            </div>
+</div>
+<div class="container" style="padding-left: 25px;padding-right: 25px;">
+    <div class="row text-white" style="background-image: url('<?= HTTP_IMG ?>violet.png'); background-size: cover;">
+        <div class="col p-5">
+            <p class="display-3 text-center">FOR CONSERVING AND RESTORING ECOSYSTEM</p>
+            <br><br><br><br>
+            <center>
+                <button class="btn btn-see-more">Donate</button>
+            </center>
         </div>
     </div>
-    <?php require_once "footer.php"; ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $("#txtpresentation").height(400);
-            $("#txtobjectif").height(400);
+</div>
+<?php require_once "footer.php"; ?>
+<!-- Modal -->
+<div class="modal fade" id="modalteam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"  >
+                <h5 class="modal-title" id="exampleModalLabel">Nos Teams</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img id="img_detail" src="" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 id="titre_deail" class="card-title">Card title</h3>
+                                <p class="card-text" id="contenu_detail">
+                                    ...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $("#txtpresentation").height(400);
+        $("#txtobjectif").height(400);
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Texte à afficher
+        var textePresentation = $("#txtpresentation_input").val();
+        var texteObj = $("#txtobjectif_input").val();
+        // Split du texte en mots pour la présentation
+        var motsPresentation = textePresentation.split(" ");
+        // Split du texte en mots pour les objectifs
+        var motsObj = texteObj.split(" ");
+        // Nombre de mots par page
+        var motsParPage = <?= _getText("motsParPage") ?>;
+        // Numéro de la page actuelle pour la présentation
+        var pageActuellePresentation = 1;
+        // Numéro de la page actuelle pour les objectifs
+        var pageActuelleObjectif = 1;
+        // Identifiants des éléments où afficher les textes
+        var idResultatPresentation = "txtpresentation";
+        var idResultatObjectif = "txtobjectif";
+        // Affichage initial pour la présentation
+        afficherPage(pageActuellePresentation, idResultatPresentation, motsPresentation);
+        // Affichage initial pour les objectifs
+        afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
+        // Clic sur le bouton "Suivant" pour la présentation
+        $("#nextPagePresentation").click(function() {
+            suivant('presentation');
         });
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Texte à afficher
-            var textePresentation = $("#txtpresentation_input").val();
-            var texteObj = $("#txtobjectif_input").val();
-            // Split du texte en mots pour la présentation
-            var motsPresentation = textePresentation.split(" ");
-            // Split du texte en mots pour les objectifs
-            var motsObj = texteObj.split(" ");
-            // Nombre de mots par page
-            var motsParPage = <?= _getText("motsParPage") ?>;
-            // Numéro de la page actuelle pour la présentation
-            var pageActuellePresentation = 1;
-            // Numéro de la page actuelle pour les objectifs
-            var pageActuelleObjectif = 1;
-            // Identifiants des éléments où afficher les textes
-            var idResultatPresentation = "txtpresentation";
-            var idResultatObjectif = "txtobjectif";
-            // Affichage initial pour la présentation
-            afficherPage(pageActuellePresentation, idResultatPresentation, motsPresentation);
-            // Affichage initial pour les objectifs
-            afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
-            // Clic sur le bouton "Suivant" pour la présentation
-            $("#nextPagePresentation").click(function() {
-                suivant('presentation');
+        // Clic sur le bouton "Précédent" pour la présentation
+        $("#previousPagePresentation").click(function() {
+            precedent('presentation');
+        });
+        // Clic sur le bouton "Suivant" pour les objectifs
+        $("#nextPageObjectif").click(function() {
+            suivant('objectif');
+        });
+        // Clic sur le bouton "Précédent" pour les objectifs
+        $("#previousPageObjectif").click(function() {
+            precedent('objectif');
+        });
+        // Fonction pour afficher la page spécifiée
+        function afficherPage(page, idResultat, mots) {
+            var debut = (page - 1) * motsParPage;
+            var fin = debut + motsParPage;
+            var pageTexte = mots.slice(debut, fin).join(" ");
+            $("#" + idResultat).fadeOut("slow", function() {
+                $(this).text(pageTexte).fadeIn("slow");
             });
-            // Clic sur le bouton "Précédent" pour la présentation
-            $("#previousPagePresentation").click(function() {
-                precedent('presentation');
-            });
-            // Clic sur le bouton "Suivant" pour les objectifs
-            $("#nextPageObjectif").click(function() {
-                suivant('objectif');
-            });
-            // Clic sur le bouton "Précédent" pour les objectifs
-            $("#previousPageObjectif").click(function() {
-                precedent('objectif');
-            });
-            // Fonction pour afficher la page spécifiée
-            function afficherPage(page, idResultat, mots) {
-                var debut = (page - 1) * motsParPage;
-                var fin = debut + motsParPage;
-                var pageTexte = mots.slice(debut, fin).join(" ");
-                $("#" + idResultat).fadeOut("slow", function() {
-                    $(this).text(pageTexte).fadeIn("slow");
-                });
-                miseAJourBoutons(page, idResultat);
+            miseAJourBoutons(page, idResultat);
+        }
+        // Fonction pour afficher la page précédente ou suivante
+        function precedentOuSuivant(pageType, direction) {
+            var pageActuelle;
+            if (pageType === 'presentation') {
+                pageActuelle = (direction === 'precedent') ? pageActuellePresentation : pageActuellePresentation++;
+                afficherPage(pageActuelle, idResultatPresentation, motsPresentation);
+            } else if (pageType === 'objectif') {
+                pageActuelle = (direction === 'precedent') ? pageActuelleObjectif : pageActuelleObjectif++;
+                afficherPage(pageActuelle, idResultatObjectif, motsObj);
             }
-            // Fonction pour afficher la page précédente ou suivante
-            function precedentOuSuivant(pageType, direction) {
-                var pageActuelle;
-                if (pageType === 'presentation') {
-                    pageActuelle = (direction === 'precedent') ? pageActuellePresentation : pageActuellePresentation++;
-                    afficherPage(pageActuelle, idResultatPresentation, motsPresentation);
-                } else if (pageType === 'objectif') {
-                    pageActuelle = (direction === 'precedent') ? pageActuelleObjectif : pageActuelleObjectif++;
-                    afficherPage(pageActuelle, idResultatObjectif, motsObj);
+        }
+        // Fonction pour afficher la page précédente
+        function precedent(pageType) {
+            if (pageType === 'presentation') {
+                if (pageActuellePresentation > 1) {
+                    pageActuellePresentation--;
+                    afficherPage(pageActuellePresentation, idResultatPresentation, motsPresentation);
+                }
+            } else if (pageType === 'objectif') {
+                if (pageActuelleObjectif > 1) {
+                    pageActuelleObjectif--;
+                    afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
                 }
             }
-            // Fonction pour afficher la page précédente
-            function precedent(pageType) {
-                if (pageType === 'presentation') {
-                    if (pageActuellePresentation > 1) {
-                        pageActuellePresentation--;
-                        afficherPage(pageActuellePresentation, idResultatPresentation, motsPresentation);
-                    }
-                } else if (pageType === 'objectif') {
-                    if (pageActuelleObjectif > 1) {
-                        pageActuelleObjectif--;
-                        afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
-                    }
+        }
+        // Fonction pour afficher la page suivante
+        function suivant(pageType) {
+            if (pageType === 'presentation') {
+                if (pageActuellePresentation < Math.ceil(motsPresentation.length / motsParPage)) {
+                    pageActuellePresentation++;
+                    afficherPage(pageActuellePresentation, idResultatPresentation, motsPresentation);
+                }
+            } else if (pageType === 'objectif') {
+                if (pageActuelleObjectif < Math.ceil(motsObj.length / motsParPage)) {
+                    pageActuelleObjectif++;
+                    afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
                 }
             }
-            // Fonction pour afficher la page suivante
-            function suivant(pageType) {
-                if (pageType === 'presentation') {
-                    if (pageActuellePresentation < Math.ceil(motsPresentation.length / motsParPage)) {
-                        pageActuellePresentation++;
-                        afficherPage(pageActuellePresentation, idResultatPresentation, motsPresentation);
-                    }
-                } else if (pageType === 'objectif') {
-                    if (pageActuelleObjectif < Math.ceil(motsObj.length / motsParPage)) {
-                        pageActuelleObjectif++;
-                        afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
-                    }
-                }
+        }
+        // Fonction pour activer ou désactiver les boutons en fonction de la page actuelle
+        function miseAJourBoutons(page, idResultat) {
+            if (idResultat === idResultatPresentation) {
+                $("#previousPagePresentation").toggleClass("disabled", page === 1);
+                $("#nextPagePresentation").toggleClass("disabled", page === Math.ceil(motsPresentation.length / motsParPage));
+            } else if (idResultat === idResultatObjectif) {
+                $("#previousPageObjectif").toggleClass("disabled", page === 1);
+                $("#nextPageObjectif").toggleClass("disabled", page === Math.ceil(motsObj.length / motsParPage));
             }
-            // Fonction pour activer ou désactiver les boutons en fonction de la page actuelle
-            function miseAJourBoutons(page, idResultat) {
-                if (idResultat === idResultatPresentation) {
-                    $("#previousPagePresentation").toggleClass("disabled", page === 1);
-                    $("#nextPagePresentation").toggleClass("disabled", page === Math.ceil(motsPresentation.length / motsParPage));
-                } else if (idResultat === idResultatObjectif) {
-                    $("#previousPageObjectif").toggleClass("disabled", page === 1);
-                    $("#nextPageObjectif").toggleClass("disabled", page === Math.ceil(motsObj.length / motsParPage));
+        }
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".pager-activite li a").click(function(e) {
+            e.preventDefault();
+            var type = $(this).data("type");
+            var params = {
+                type: type,
+                limit: $("#txtlimit").val()
+            };
+            // Afficher l'indicateur de chargement
+            $("#loading").show();
+            // Effectuer une requête AJAX
+            $.ajax({
+                url: "<?= HTTP_AJAX_ACTIVITE ?>afficheactivitesuivant.php",
+                method: "POST",
+                data: params,
+                dataType: "json",
+                success: function(r) {
+                    //debugJSON(r);
+                    $("#titre_activite").html(r.titre);
+                    $("#contenu_activite").html(r.contenu);
+                    $("#photo_event").html(r.photo_event);
+                    //class="w-100"
+                    $("#txtlimit").val(r.limit);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+                complete: function() {
+                    // Masquer l'indicateur de chargement une fois la requête terminée
+                    $("#loading").hide();
                 }
-            }
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $(".pager-activite li a").click(function(e) {
-                e.preventDefault();
-                var type = $(this).data("type");
-                var params = {
-                    type: type,
-                    limit: $("#txtlimit").val()
-                };
-                // Afficher l'indicateur de chargement
-                $("#loading").show();
-                // Effectuer une requête AJAX
-                $.ajax({
-                    url: "<?= HTTP_AJAX_ACTIVITE ?>afficheactivitesuivant.php",
-                    method: "POST",
-                    data: params,
-                    dataType: "json",
-                    success: function(r) {
-                        //debugJSON(r);
-                        $("#titre_activite").html(r.titre);
-                        $("#contenu_activite").html(r.contenu);
-                        $("#photo_event").html(r.photo_event);
-                        //class="w-100"
-                        $("#txtlimit").val(r.limit);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    },
-                    complete: function() {
-                        // Masquer l'indicateur de chargement une fois la requête terminée
-                        $("#loading").hide();
-                    }
-                });
             });
-            $(".pager-activite li a").trigger("click");
         });
-        $(document).ready(function() {
-            $(".pager-teams li a").click(function(e) {
-                e.preventDefault();
-                var type = $(this).data("type");
-                var params = {
-                    type: type,
-                    limit: $("#txtlimitteam").val()
-                };
-                // Afficher l'indicateur de chargement
-                $("#loadingteam").show();
-                // Effectuer une requête AJAX
-                $.ajax({
-                    url: "<?= HTTP_AJAX_ACTIVITE ?>afficheteamsuivant.php",
-                    method: "POST",
-                    data: params,
-                    dataType: "html",
-                    success: function(r) {
-                        //debugJSON(r);
-                        $("#liste-team").html(r);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    },
-                    complete: function() {
-                        // Masquer l'indicateur de chargement une fois la requête terminée
-                        $("#loadingteam").hide();
-                    }
-                });
+        $(".pager-activite li a").trigger("click");
+    });
+    $(document).ready(function() {
+        $(".pager-teams li a").click(function(e) {
+            e.preventDefault();
+            var type = $(this).data("type");
+            var params = {
+                type: type,
+                limit: $("#txtlimitteam").val()
+            };
+            // Afficher l'indicateur de chargement
+            $("#loadingteam").show();
+            // Effectuer une requête AJAX
+            $.ajax({
+                url: "<?= HTTP_AJAX_ACTIVITE ?>afficheteamsuivant.php",
+                method: "POST",
+                data: params,
+                dataType: "html",
+                success: function(r) {
+                    //debugJSON(r);
+                    $("#liste-team").html(r);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+                complete: function() {
+                    // Masquer l'indicateur de chargement une fois la requête terminée
+                    $("#loadingteam").hide();
+                }
             });
-            $(".pager-teams li a").trigger("click");
         });
-    </script>
+        $(".pager-teams li a").trigger("click");
+    });
+</script>

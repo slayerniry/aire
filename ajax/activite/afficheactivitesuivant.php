@@ -12,6 +12,7 @@ if ($type == 0) { //precedent
 } else { //suivant
     $limit = ($limit < count($dataNBR) - 1) ? $limit + 1 : 0;
 }
+$critere['limitNBR'] = 1 ;
 $critere["limit"]  = $limit;
 $data = $t_event->lireParCritere($critere);
 $data[0]["limit"] = $limit;

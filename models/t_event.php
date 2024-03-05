@@ -31,16 +31,8 @@ class t_event
 
         $sSQL .= " ORDER BY id_event DESC ";
 
-        if (isset($critere['limit']) && $critere['id_type_event'] != "") {
-
-            if ($critere['id_type_event'] == "3") {
-                $sSQL .= " LIMIT " . $critere["limit"] . ",1 ";
-            }
-
-            if ($critere['id_type_event'] == "4") {
-
-                $sSQL .= " LIMIT " . $critere["limit"] . ",4 ";
-            }
+        if (isset($critere['limit']) && isset($critere['limitNBR']) ) {
+            $sSQL .= " LIMIT " . $critere["limit"] . ", " . $critere['limitNBR'];
         }
 
       

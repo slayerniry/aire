@@ -12,27 +12,27 @@ $critere["id_type_event"]  =  $parametre->lireCle("CODE_TYPE_TEAMS");
 $dataNBR = $t_event->lireParCritere($critere);
 
 
-$nbr = 4 ;
+$nbr = 4;
 
 if ($type == 0) { //precedent
     $limit -= $nbr;
     $remainder = count($dataNBR) % $nbr;
-    
+
     if ($limit < 0) {
         $limit = $remainder != 0 ? count($dataNBR) - $remainder : count($dataNBR);
     }
     if ($limit == count($dataNBR)) {
-        $limit = count($dataNBR) -$nbr;
+        $limit = count($dataNBR) - $nbr;
     }
 } else { //suivant
     $limit += $nbr;
-    
+
     if (count($dataNBR) <= $limit) {
         $limit = 0;
     }
 }
 
-
+$critere['limitNBR'] = 4 ;
 $critere["limit"]  = $limit;
 $data = $t_event->lireParCritere($critere);
 ?>
@@ -42,10 +42,34 @@ for ($i = 0; $i < count($data); $i++) {
 ?>
     <div class="col">
         <div class="card" style="width: 18rem;">
-            <?= $data[$i]["photo_event"] ?>
-            <div class="card-body">
-                <p class="card-text"><?= $data[$i]["titre"] ?></p>
+            <div type="button" class="clickable" data-bs-toggle="modal" data-bs-target="#modalteam">
+                <?= $data[$i]["photo_event"] ?>
             </div>
+            <div class="card-body">
+                <p class="card-text">
+                <h3 class="text-center"><?= $data[$i]["titre"] ?></h3>
+                </p>
+            </div>
+            <span style="display: none;">
+                <?= $data[$i]["contenu"] ?>
+            </span>
         </div>
     </div>
 <?php } ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.clickable').click(function() {
+            // Get the source of the clicked image
+            var src = $(this).find('.photo_team').attr("src");
+
+            var titre = $(this).parent().find('h3').html();
+            var contenu = $(this).parent().find('span').html();
+
+            $('#titre_deail').html(titre);
+            $('#contenu_detail').html(contenu);
+            $('#img_detail').attr('src', src);
+            
+        });
+    });
+</script>

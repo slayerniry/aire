@@ -1,1 +1,1 @@
-XCOPY /S /Y /d:02-03-2024 "*.*" "E:\2024\Miora\patch"
+XCOPY /S /Y /d:03-05-2024 "*.*" "C:\Users\niry\Documents\Projet\Miora\patch"
