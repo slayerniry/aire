@@ -15,6 +15,7 @@ loadRessource("fr");
     <link href="<?= HTTP_PAGE ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= HTTP_PAGE ?>css/bootstrap-icons.min.css" rel="stylesheet">
     <link href="<?= HTTP_PAGE ?>css/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="<?= HTTP_PAGE ?>css/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= HTTP_PAGE ?>css/style.css">
    
     <script src="<?= HTTP_PAGE ?>js/jquery-3.6.3.min.js"></script>

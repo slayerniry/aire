@@ -4,6 +4,7 @@ namespace Models;
 
 use Models\DatabaseConnection;
 
+
 class t_event
 {
 
@@ -28,14 +29,17 @@ class t_event
         if (isset($critere['id_type_event']) && $critere['id_type_event'] != "")
             $sSQL .= " AND id_type_event = '" . ($critere['id_type_event']) . "'";
 
+        if (isset($critere['type']) && $critere['type'] != "")
+            $sSQL .= " AND type = '" . ($critere['type']) . "'";
+
 
         $sSQL .= " ORDER BY id_event DESC ";
 
-        if (isset($critere['limit']) && isset($critere['limitNBR']) ) {
+        if (isset($critere['limit']) && isset($critere['limitNBR'])) {
             $sSQL .= " LIMIT " . $critere["limit"] . ", " . $critere['limitNBR'];
         }
 
-      
+
         $results =  $this->connect->execute_req_pdo($sSQL);
 
         return $results;
@@ -49,4 +53,6 @@ class t_event
 
         return $res[0]["maxi"];
     }
+
+    
 } //fin class

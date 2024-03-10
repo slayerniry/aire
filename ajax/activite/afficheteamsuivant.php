@@ -32,17 +32,24 @@ if ($type == 0) { //precedent
     }
 }
 
-$critere['limitNBR'] = 4 ;
+$critere['limitNBR'] = 4;
 $critere["limit"]  = $limit;
 $data = $t_event->lireParCritere($critere);
 ?>
+<style>
+    .clickable:hover {
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+
+    }
+</style>
 <input type="hidden" id="txtlimitteam" value="<?= $limit ?>" />
 <?php
 for ($i = 0; $i < count($data); $i++) {
 ?>
     <div class="col">
         <div class="card" style="width: 18rem;">
-            <div type="button" class="clickable" data-bs-toggle="modal" data-bs-target="#modalteam">
+            <div type="button" class="clickable  animate__animated animate__fadeInRight" data-bs-toggle="modal" data-bs-target="#modalteam">
                 <?= $data[$i]["photo_event"] ?>
             </div>
             <div class="card-body">
@@ -69,7 +76,7 @@ for ($i = 0; $i < count($data); $i++) {
             $('#titre_deail').html(titre);
             $('#contenu_detail').html(contenu);
             $('#img_detail').attr('src', src);
-            
+
         });
     });
 </script>

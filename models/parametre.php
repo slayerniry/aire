@@ -31,5 +31,19 @@ class parametre
 
     }
 
+    public function lireParCritere(array $critere = [])
+    {
+        $sSQL = "SELECT *
+                FROM parametre 
+                WHERE 1 = 1  ";
+
+        if (isset($critere['param_key']) && $critere['param_key'] != "")
+            $sSQL .= " AND param_key = '" . ($critere['param_key']) . "'";
+
+        $results =  $this->connect->execute_req_pdo($sSQL);
+
+        return $results;
+    }
+
    
 } //fin class

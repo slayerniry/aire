@@ -1,8 +1,37 @@
 <?php require_once "header.php";
+$parametre = new Models\parametre;
+/** code sous domaine  */
+$tabsoustype =   explode("|", $parametre->lireCle("LIST_SOUS_TYPE_EVENT"));
+$cri["param_key"] = "PRESENTATION_TEXT" ;
+$dataPresentation = $parametre->lireParCritere($cri);
+$cri["param_key"] = "OBJECTIF_TEXT" ;
+$dataObjectif = $parametre->lireParCritere($cri);
+$objectif_text = "";
+if(count($dataObjectif)> 0){
+    $objectif_text=$dataObjectif[0]["param_desc"];
+}
+if(count($dataPresentation)> 0){
+    $presentation_text=$dataPresentation[0]["param_desc"];
+}
+foreach ($tabsoustype as $key => $value) {
+    $tabsoustypeDeail[] = explode(":", $value);
+}
+$rech = $tabsoustypeDeail[0][0];
+$rechLib = $tabsoustypeDeail[0][1];
+$dev = $tabsoustypeDeail[1][0];
+$devLib = $tabsoustypeDeail[1][1];
+/** fin sous domaine */
 ?>
 <style>
+    #divactivite2 {
+        display: none;
+    }
+    #divactivite {
+        display: block;
+    }
     .page-link i {
         color: #006633;
+        font-size: 38px;
     }
     .page-link:hover {
         background-color: #73c17c;
@@ -10,17 +39,20 @@
     .img-domaine {
         width: 200px;
     }
+    .img-domaine:hover {
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+    }
     .btn-see-more {
         font-family: 'Nunito';
-        font-size: 12pt;
         font-weight: bold;
         background-color: white;
         color: #006633;
         width: fit-content;
+        font-size: 38px;
     }
     .btn-see-more:hover {
         font-family: 'Nunito';
-        font-size: 12pt;
         background-color: #73c17c;
         color: white;
     }
@@ -46,9 +78,6 @@
         font-size: 48pt;
         color: #006633;
     }
-    #img-protgerlenvironnement {
-        background-color: #73c17c;
-    }
     #img-protgerlenvironnement-text {
         font-size: 60pt;
         padding: 50px;
@@ -66,9 +95,6 @@
         font-size: 14pt;
         width: 50%;
     }
-    .div-domaine {
-        padding: 100px;
-    }
     @media screen and (max-width:1196px) {
         .title_head {
             padding-top: 10px;
@@ -81,38 +107,12 @@
         #img-protgerlenvironnement-text {
             font-size: 55pt;
         }
-        #last .display-6,
-        #last .display-4,
-        #last .display-5 {
-            font-size: 20px;
-        }
-        .display-1 {
-            font-size: calc(4.5vw);
-            font-weight: 300;
-            line-height: 1.2;
-        }
-        .display-6 {
-            font-size: calc(1.5vw);
-            font-weight: 300;
-            line-height: 1.2;
-        }
         h1 {
             font-size: 25pt;
             color: #006633;
         }
     }
     @media screen and (max-width:1024px) {
-        #last .display-6,
-        #last .display-4,
-        #last .display-5,
-        #last .card-text {
-            font-size: 10px;
-        }
-        #last .display-6,
-        #last .display-4,
-        #last .display-5 {
-            font-size: 14px;
-        }
         #act-precedent .btn {
             width: 10px;
         }
@@ -137,12 +137,46 @@
             height: 100px;
             overflow-y: scroll;
         }
-        .div-domaine {
-            padding: 0px;
-        }
         .card-text {
             font-family: 'Nunito';
             font-size: 10pt;
+        }
+    }
+    @media screen and (max-width:390px) {
+        .title_head {
+            padding-top: 0px;
+            padding-left: 0px;
+            font-size: 20px;
+        }
+        .page-link i {
+            color: #006633;
+            font-size: 18px;
+        }
+        #img-protgerlenvironnement-text {
+            font-size: 25pt;
+        }
+        #divactivite2 {
+            display: block;
+        }
+        #divactivite {
+            display: none;
+        }
+        .btn-see-more {
+            font-size: 18px;
+        }
+        #liste-team .card {
+            width: 150px !important;
+        }
+        #div-domaine .card {
+            width: 150px !important;
+        }
+        .img-domaine {
+            width: 100px;
+            cursor: pointer;
+        }
+        .img-domaine:hover {
+            width: 100px;
+            cursor: pointer;
         }
     }
 </style>
@@ -162,79 +196,110 @@
     </div>
 </div>
 <div class="container" id="divapropos">
-    <h1><?= _getText("a.propos") ?></h1>
-    <div class="row mb-2 align-items-stretch">
-        <div class="col-md-6" style="display: flex;">
-            <div class="div-card-text row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow position-relative" style="flex-grow: 1;">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h2>Presentation</h2>
-                    <p class="card-text text-justify" id="txtpresentation">
-                        <!-- Placeholder text goes here -->
-                    </p>
-                    <input type="hidden" id="txtpresentation_input" value="<?= _getText("presentation") ?>">
+    <div class="row">
+        <div class="col">
+            <h1><?= _getText("a.propos") ?></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div>
+                            <h2><?= _getText("presentation")  ?></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="card-text text-justify mb-auto" id="txtpresentation">
+                                <!-- Placeholder text goes here -->
+                            </p>
+                            <input type="hidden" id="txtpresentation_input" value="<?= $presentation_text ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <img style="border: none;" src="<?= HTTP_IMG ?>presentation.gif" class="img-thumbnail" alt="Presentation Image">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-auto d-none d-lg-flex justify-content-center align-items-center">
-                    <img src="<?= HTTP_IMG ?>presentation.gif" alt="Presentation Image">
+                <div class="card-footer text-muted">
+                    <ul class="pagination justify-content-end bg-transparent">
+                        <li class="page-item disabled" id="previousPagePresentation">
+                            <button class="page-link border-0" tabindex="-1" aria-disabled="true">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                        </li>
+                        <li class="page-item" id="nextPagePresentation">
+                            <button class="page-link border-0">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled" id="previousPagePresentation">
-                        <button class="page-link border-0" tabindex="-1" aria-disabled="true">
-                            <i class="bi bi-caret-left-fill"></i>
-                        </button>
-                    </li>
-                    <li class="page-item" id="nextPagePresentation">
-                        <button class="page-link border-0">
-                            <i class="bi bi-caret-right-fill"></i>
-                        </button>
-                    </li>
-                </ul>
             </div>
         </div>
-        <div class="col-md-6" style="display: flex;">
-            <div class="div-card-text row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow position-relative" style="flex-grow: 1;">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h2>Objectif</h2>
-                    <p class="card-text text-justify mb-auto" id="txtobjectif">
-                        <!-- Placeholder text goes here -->
-                    </p>
-                    <input type="hidden" id="txtobjectif_input" value="<?= _getText("objectif") ?>">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h2><?= _getText("objectif") ?></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="card-text text-justify mb-auto" id="txtobjectif">
+                                <!-- Placeholder text goes here -->
+                            </p>
+                            <input type="hidden" id="txtobjectif_input" value="<?= $objectif_text ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <img style="border: none;" src="<?= HTTP_IMG ?>objectif.gif" class="img-thumbnail " alt="Objectif Image">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-auto d-none d-lg-flex justify-content-center align-items-center">
-                    <img src="<?= HTTP_IMG ?>objectif.gif" alt="Objectif Image">
+                <div class="card-footer text-muted">
+                    <ul class="pagination justify-content-end bg-transparent">
+                        <li class="page-item disabled" id="previousPageObjectif">
+                            <button class="page-link border-0" tabindex="-1" aria-disabled="true">
+                                <i class="bi  bi-chevron-left"></i>
+                            </button>
+                        </li>
+                        <li class="page-item" id="nextPageObjectif">
+                            <button class="page-link border-0">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled" id="previousPageObjectif">
-                        <button class="page-link border-0" tabindex="-1" aria-disabled="true">
-                            <i class="bi bi-caret-left-fill"></i>
-                        </button>
-                    </li>
-                    <li class="page-item" id="nextPageObjectif">
-                        <button class="page-link border-0">
-                            <i class="bi bi-caret-right-fill"></i>
-                        </button>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
-    <div id="img-protgerlenvironnement" class="row justify-content-center align-items-center g-2">
+    <!--<div id="img-protgerlenvironnement" class="row justify-content-center align-items-center g-2">
         <div class="col position-relative">
             <center>
-                <img src="<?= HTTP_IMG ?>protgerlenvironnement.jpg" class="img-fluid" alt="Protéger l'environnement">
+                <img src="" class="img-fluid" alt="Protéger l'environnement">
             </center>
-            <div class="position-absolute start-0 top-0  " id="img-protgerlenvironnement-text">
-                <?= _getText("text.vert.haut") ?><br><?= str_repeat("&nbsp;", 20)  ?><?= _getText("text.vert.bas") ?>
+            <div class="start-0 top-0  " id="img-protgerlenvironnement-text">
+            </div>
+        </div>
+    </div>!-->
+    <div class="row">
+        <div class="col" style="background-image:url('<?= HTTP_IMG ?>protgerlenvironnement.jpg');">
+            <div class="start-0 top-0  " id="img-protgerlenvironnement-text">
+                <?= _getText("text.vert.haut") ?><br><?= _getText("text.vert.bas") ?>
             </div>
         </div>
     </div>
 </div>
+<!--activite-->
 <div class="container" id="divactivite">
     <h1><?= _getText("activites") ?></h1>
     <div class="row justify-content-center align-items-center g-2" style="position: relative;">
         <!--<img style="" src="<?= HTTP_IMG ?>mamsoala.jpg" alt="">-->
-        <div id="photo_event">
+        <div class="photo_event">
         </div>
         <img style="position: absolute; top: 0; left: 0;" src="<?= HTTP_IMG ?>activite-head.png" class="w-100" alt="">
         <div class="position-absolute start-0 top-0" id="">
@@ -245,7 +310,7 @@
             </style>
             <div class="row">
                 <div class="col">
-                    <h2 id="titre_activite"></h2>
+                    <h2 class="titre_activite"></h2>
                 </div>
             </div>
             <div id="loading" style="display: none;">
@@ -254,7 +319,7 @@
                 </div>
             </div>
             <div class="activite-text">
-                <p id="contenu_activite"></p>
+                <p class="contenu_activite"></p>
             </div>
         </div>
         <div class="position-absolute bottom-0" style="padding: 2%;">
@@ -263,158 +328,81 @@
                 </div>
                 <div class="col">
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="text-align: right;">
                             <input type="hidden" id="txtlimit" value="0" />
                             <ul class="pager pager-activite">
-                                <li><a href="javascript:void(0)" data-type="0" id="act-precedent"> <button class="btn btn-see-more"><i class="bi bi-caret-left-fill"></i></button> </a></li>
-                                <li><a href="javascript:void(0)" data-type="1" id="act-suivant"><button class="btn btn-see-more"><i class="bi bi-caret-right-fill"></i></button></a></li>
+                                <li><a href="javascript:void(0)" data-type="0"> <button class="btn btn-see-more"><i class="bi  bi-chevron-left"></i></button> </a></li>
+                                <li><a href="javascript:void(0)" data-type="1"><button class="btn btn-see-more"><i class="bi bi-chevron-right"></i></button></a></li>
                             </ul>
                         </div>
-                        <div class="col">
+                        <!--<div class="col">
                             <div style="text-align: right;">
                                 <button class="btn btn-see-more">See more</button>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="container" id="divactivite2">
+    <div class="row">
+        <div class="col">
+            <h1><?= _getText("activites") ?></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header titre_activite">Header</div>
+                <div class="photo_event"></div>
+                <div class="card-body">
+                    <p class="card-text contenu_activite">Text</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <ul class="pager pager-activite">
+                        <li><a href="javascript:void(0)" data-type="0"> <button class="btn btn-see-more"><i class="bi  bi-chevron-left"></i></button> </a></li>
+                        <li><a href="javascript:void(0)" data-type="1"><button class="btn btn-see-more"><i class="bi bi-chevron-right"></i></button></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
-    <h1>Nos Domaine</h1>
+    <h1><?= _getText("domaines") ?></h1>
 </div>
 <div class="container div-domaine">
     <div class="row justify-content-center align-items-center g-2">
         <div class="col">
-            <img class="card-img-top img-domaine" src="<?= HTTP_IMG ?>homme-lampe.png" alt="Title" />
-            <br>
-            <button class="btn btn-success"><i class="bi bi-123"></i></button>
-            <div class="card-body">
-                <h2 class="card-title">Research and technogy</h2>
-                <p class="card-text">Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p>
-                <hr>
-                <div>Location 0.3 miles.</div>
+            <div class="card bg-body-secondary p-5" style="cursor: pointer; border: none;">
+                <center>
+                    <img class="card-img-top img-domaine" type="<?= $rech ?>" src="<?= HTTP_IMG ?>homme-lampe.png" alt="Title" />
+                    <div class="card-body">
+                        <h2 class="card-title"><?= $rechLib ?></h2>
+                    </div>
+                </center>
             </div>
         </div>
         <div class="col">
-            <img class="card-img-top img-domaine" src="<?= HTTP_IMG ?>mode-feuille.jpg" alt="Title" />
-            <br>
-            <button class="btn btn-success"><i class="bi bi-123"></i></button>
-            <div class="card-body">
-                <h2 class="card-title">development & conservation</h2>
-                <p class="card-text">Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p>
-                <hr>
-                <div>Location 0.3 miles.</div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center align-items-center g-2">
-        <div class="col">
-            <center>
-                <button class="btn btn-see-more">See more</button>
-            </center>
-        </div>
-    </div>
-</div>
-<!--<div class="container" style="background-image: url('<?= HTTP_IMG ?>apres-domaine.jpg');background-size: cover;">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="h-100 p-5 text-white position-relative">
-                <p class="position-absolute bottom-50 start-0 mb-0 display-6">
-                    21.05.20
-                </p>
-                <div class="position-absolute start-0 bottom-0" style="padding: 2%;">
-                    <button class="btn btn-see-more">See more</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="h-100 p-5 text-white text-end">
-                <div class="display-1">Hiking & Backpacking</div>
-                <div class="display-4">this hike is the next best option</div>
+            <div class="card p-5" style="cursor: pointer;border: none;">
+                <center>
+                    <img class="card-img-top img-domaine" type="<?= $dev ?>" src="<?= HTTP_IMG ?>mode-feuille.png" alt="Title" />
+                    <div class="card-body">
+                        <h2 class="card-title"><?= $devLib ?></h2>
+                    </div>
+                </center>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h1>Hiking And Camping Classes</h1>
-        </div>
-    </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100 border-0">
-                <center>
-                    <img src="<?= HTTP_IMG ?>activity.gif" class="h-0" alt="...">
-                </center>
-                <div class="card-body text-center">
-                    <h2 class="card-title">Activity</h2>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-see-more">See more</button>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 border-0">
-                <center>
-                    <img src=" <?= HTTP_IMG ?>hiking.gif" class="h-0" alt="...">
-                </center>
-                <div class="card-body text-center">
-                    <h2 class="card-title">Hiking</h2>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-see-more">See more</button>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 border-0">
-                <center>
-                    <img src=" <?= HTTP_IMG ?>montain.gif" class="h-0" alt="...">
-                </center>
-                <div class="card-body text-center">
-                    <h2 class="card-title">Montains</h2>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-see-more">See more</button>
-                </div>
-            </div>
+        <div class="col" id="listeDomaine">
         </div>
     </div>
 </div>
-<div class="container" id="last">
-    <div class="row justify-content-center align-items-center g-2" style="position: relative;">
-        <img style="" src="<?= HTTP_IMG ?>climb.jpg" class="w-100" alt="">
-        <img style="position: absolute; top: 0; left: 0;" src="<?= HTTP_IMG ?>last.png" class="w-100" alt="">
-        <div class="position-absolute start-0 top-0" id="">
-            <div class="row p-5">
-                <div class="col">
-                    <p class="display-6">23.06.20</p>
-                </div>
-                <div class="col">
-                    <p class="display-6">Price</p>
-                    <p class="display-6">$900</p>
-                </div>
-                <div class="col-6">
-                    <p class="display-4">mountaineering</p>
-                    <p class="display-4">ice Climbing</p>
-                    <p class="display-5"> 2. activities</p>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    <hr>
-                    <p class="display-6">10 modules </p>
-                    <p class="display-6">divided into 7 weekends</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
 <div class="container">
     <h1>Nos Teams</h1>
 </div>
@@ -431,8 +419,8 @@
         <div class="col">
             <center>
                 <ul class="pager pager-teams">
-                    <li><a href="javascript:void(0)" data-type="0" id="teams-precedent"> <button class="btn btn-see-more"><i class="bi bi-caret-left-fill"></i></button> </a></li>
-                    <li><a href="javascript:void(0)" data-type="1" id="teams-suivant"><button class="btn btn-see-more"><i class="bi bi-caret-right-fill"></i></button></a></li>
+                    <li><a href="javascript:void(0)" data-type="0" id="teams-precedent"> <button class="btn btn-see-more"><i class="bi  bi-chevron-left"></i></button> </a></li>
+                    <li><a href="javascript:void(0)" data-type="1" id="teams-suivant"><button class="btn btn-see-more"><i class="bi bi-chevron-right"></i></button></a></li>
                 </ul>
             </center>
         </div>
@@ -479,7 +467,7 @@
 <div class="modal fade" id="modalteam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header"  >
+            <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Nos Teams</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -489,7 +477,7 @@
                         <div class="col-md-4">
                             <img id="img_detail" src="" class="img-fluid rounded-start" alt="...">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 ">
                             <div class="card-body">
                                 <h3 id="titre_deail" class="card-title">Card title</h3>
                                 <p class="card-text" id="contenu_detail">
@@ -500,7 +488,7 @@
                     </div>
                 </div>
             </div>
-           <!-- <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>-->
         </div>
@@ -508,8 +496,31 @@
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-        $("#txtpresentation").height(400);
-        $("#txtobjectif").height(400);
+        $(".img-domaine").click(function(event) {
+            $(".card").removeClass('bg-body-secondary');
+            $(this).closest('.card').addClass('bg-body-secondary');
+            var type = $(this).attr("type");
+            var divload = '<div class="spinner-grow  text-success" role="status"><span class="visually-hidden">Loading...</span></div>'
+            $("#listeDomaine").html(divload);
+            $.ajax({
+                    url: '<?= HTTP_AJAX_ACTIVITE ?>afficheDomaine.php',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: {
+                        type: type
+                    },
+                })
+                .done(function(r) {
+                    $("#listeDomaine").html(r);
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+        });
+        $(".img-domaine").trigger("click");
     });
 </script>
 <script>
@@ -584,6 +595,17 @@
                     afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
                 }
             }
+            var hp = 400;
+            var ho = 450;
+            hp = $("#txtpresentation").height();
+            ho = $("#txtobjectif").height();
+            if (hp < ho) {
+                $("#txtpresentation").height(hp);
+                $("#txtobjectif").height(hp);
+            } else {
+                $("#txtpresentation").height(ho);
+                $("#txtobjectif").height(ho);
+            }
         }
         // Fonction pour afficher la page suivante
         function suivant(pageType) {
@@ -597,6 +619,17 @@
                     pageActuelleObjectif++;
                     afficherPage(pageActuelleObjectif, idResultatObjectif, motsObj);
                 }
+            }
+            var hp = 400;
+            var ho = 450;
+            hp = $("#txtpresentation").height();
+            ho = $("#txtobjectif").height();
+            if (hp < ho) {
+                $("#txtpresentation").height(ho);
+                $("#txtobjectif").height(ho);
+            } else {
+                $("#txtpresentation").height(hp);
+                $("#txtobjectif").height(hp);
             }
         }
         // Fonction pour activer ou désactiver les boutons en fonction de la page actuelle
@@ -630,9 +663,9 @@
                 dataType: "json",
                 success: function(r) {
                     //debugJSON(r);
-                    $("#titre_activite").html(r.titre);
-                    $("#contenu_activite").html(r.contenu);
-                    $("#photo_event").html(r.photo_event);
+                    $(".titre_activite").html(r.titre);
+                    $(".contenu_activite").html(r.contenu);
+                    $(".photo_event").html(r.photo_event);
                     //class="w-100"
                     $("#txtlimit").val(r.limit);
                 },
