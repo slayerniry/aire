@@ -17,12 +17,13 @@ loadRessource("fr");
     <link href="<?= HTTP_PAGE ?>css/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="<?= HTTP_PAGE ?>css/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= HTTP_PAGE ?>css/style.css">
-   
+
+    <link rel="stylesheet" href="<?= HTTP_PAGE ?>css/animate.min.css">
+
     <script src="<?= HTTP_PAGE ?>js/jquery-3.6.3.min.js"></script>
     <script src="<?= HTTP_PAGE ?>js/bootstrap.bundle.min.js"></script>
     <script src="<?= HTTP_PAGE ?>js/aire.js"></script>
-   
-    
+    <script src="<?= HTTP_PAGE ?>js/wow.min.js"></script>
     <style type="text/css">
         @font-face {
             font-family: 'Bebas Neue';
@@ -88,13 +89,13 @@ loadRessource("fr");
                         <li class="nav-item">
                             <a class="nav-link" href="#divaccueil"><?= _getText("menu.accueil") ?></a>
                         </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#divapropos"><?= _getText("a.propos") ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#divactivite"><?= _getText("activites") ?></a>
-                </li>
-                <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#divapropos"><?= _getText("a.propos") ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#divactivite"><?= _getText("activites") ?></a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#divcontact"><?= _getText("menu.contact") ?></a>
                         </li>
                     </ul>

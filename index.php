@@ -180,9 +180,24 @@ $devLib = $tabsoustypeDeail[1][1];
         }
     }
 </style>
+
+
+<style>
+    /* Define the styles for the animated elements */
+    .wow {
+        visibility: hidden;
+    }
+
+    /* Custom animation properties */
+    .fadeInUp {
+        animation-delay: 0.2s;
+        animation-name: fadeInUp;
+    }
+</style>
+
 <div class="container" id="divaccueil">
     <div class="row justify-content-center align-items-center g-2" style="position: relative;">
-        <img style="" src="<?= HTTP_IMG ?>pdc.jpg" class="w-100" alt="">
+        <img  style="" src="<?= HTTP_IMG ?>pdc.jpg" class="w-100 " alt="">
         <img style="position: absolute; top: 0; left: 0;" src="<?= HTTP_IMG ?>head.png" class="w-100" alt="">
         <div class="position-absolute start-0 top-0" id="">
             <h1 class="title_head">
@@ -218,7 +233,7 @@ $devLib = $tabsoustypeDeail[1][1];
                             <input type="hidden" id="txtpresentation_input" value="<?= $presentation_text ?>">
                         </div>
                         <div class="col-md-4">
-                            <img style="border: none;" src="<?= HTTP_IMG ?>presentation.gif" class="img-thumbnail" alt="Presentation Image">
+                            <img  style="border: none;" src="<?= HTTP_IMG ?>presentation.gif" class="img-thumbnail " alt="Presentation Image">
                         </div>
                     </div>
                 </div>
@@ -288,7 +303,10 @@ $devLib = $tabsoustypeDeail[1][1];
     </div>!-->
     <div class="row">
         <div class="col" style="background-image:url('<?= HTTP_IMG ?>protgerlenvironnement.jpg');">
-            <div class="start-0 top-0  " id="img-protgerlenvironnement-text">
+            
+
+            <div class="start-0 top-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;" id="img-protgerlenvironnement-text" >
+
                 <?= _getText("text.vert.haut") ?><br><?= _getText("text.vert.bas") ?>
             </div>
         </div>
@@ -454,10 +472,10 @@ $devLib = $tabsoustypeDeail[1][1];
 <div class="container" style="padding-left: 25px;padding-right: 25px;">
     <div class="row text-white" style="background-image: url('<?= HTTP_IMG ?>violet.png'); background-size: cover;">
         <div class="col p-5">
-            <p class="display-3 text-center">FOR CONSERVING AND RESTORING ECOSYSTEM</p>
+            <p class="display-3 text-center"><?= _getText("text.donate")   ?></p>
             <br><br><br><br>
             <center>
-                <button class="btn btn-see-more">Donate</button>
+                <button class="btn btn-see-more"><?= _getText("donate") ?></button>
             </center>
         </div>
     </div>

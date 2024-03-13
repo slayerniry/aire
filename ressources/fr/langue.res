@@ -11,3 +11,6 @@ text.vert.haut = Acting for improving
 text.vert.bas = Rural environnement
 activites = Nos activités
 domaines = Nos Domaine
+aire.company = Aire 2024 Company, Inc
+text.donate = FOR CONSERVING AND RESTORING ECOSYSTEM
+donate = Donate 
