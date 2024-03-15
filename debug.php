@@ -317,121 +317,118 @@ function replace_texte_speciaux_excel($str)
 /**
  * ! tsy mahazo kitiana intsony
  */
-function replace_texte_speciaux($str)
-{
+function replace_texte_speciaux($str) {
+    $special_characters = array(
+        "’" => "&prime;",
+        "'" => "&prime;",
+        " " => "&nbsp;",
+        "¡" => "&iexcl;",
+        "¢" => "&cent;",
+        "£" => "&pound;",
+        "¤" => "&curren;",
+        "¥" => "&yen;",
+        "¦" => "&brvbar;",
+        "§" => "&sect;",
+        "¨" => "&uml;",
+        "©" => "&copy;",
+        "ª" => "&ordf;",
+        "«" => "&laquo;",
+        "¬" => "&not;",
+        "­" => "&shy;",
+        "®" => "&reg;",
+        "¯" => "&macr;",
+        "°" => "&deg;",
+        "±" => "&plusmn;",
+        "²" => "&sup2;",
+        "³" => "&sup3;",
+        "´" => "&acute;",
+        "µ" => "&micro;",
+        "¶" => "&para;",
+        "·" => "&middot;",
+        "¸" => "&cedil;",
+        "¹" => "&sup1;",
+        "º" => "&ordm;",
+        "»" => "&raquo;",
+        "¼" => "&frac14;",
+        "½" => "&frac12;",
+        "¾" => "&frac34;",
+        "¿" => "&iquest;",
+        "À" => "&Agrave;",
+        "Á" => "&Aacute;",
+        "Â" => "&Acirc;",
+        "Ã" => "&Atilde;",
+        "Ä" => "&Auml;",
+        "Å" => "&Aring;",
+        "Æ" => "&AElig;",
+        "Ç" => "&Ccedil;",
+        "È" => "&Egrave;",
+        "É" => "&Eacute;",
+        "Ê" => "&Ecirc;",
+        "Ë" => "&Euml;",
+        "Ì" => "&Igrave;",
+        "Í" => "&Iacute;",
+        "Î" => "&Icirc;",
+        "Ï" => "&Iuml;",
+        "Ð" => "&ETH;",
+        "Ñ" => "&Ntilde;",
+        "Ò" => "&Ograve;",
+        "Ó" => "&Oacute;",
+        "Ô" => "&Ocirc;",
+        "Õ" => "&Otilde;",
+        "Ö" => "&Ouml;",
+        "×" => "&times;",
+        "Ø" => "&Oslash;",
+        "Ù" => "&Ugrave;",
+        "Ú" => "&Uacute;",
+        "Û" => "&Ucirc;",
+        "Ü" => "&Uuml;",
+        "Ý" => "&Yacute;",
+        "Þ" => "&THORN;",
+        "ß" => "&szlig;",
+        "à" => "&agrave;",
+        "á" => "&aacute;",
+        "â" => "&acirc;",
+        "ã" => "&atilde;",
+        "ä" => "&auml;",
+        "å" => "&aring;",
+        "æ" => "&aelig;",
+        "ç" => "&ccedil;",
+        "è" => "&egrave;",
+        "é" => "&eacute;",
+        "ê" => "&ecirc;",
+        "ë" => "&euml;",
+        "ì" => "&igrave;",
+        "í" => "&iacute;",
+        "î" => "&icirc;",
+        "ï" => "&iuml;",
+        "ð" => "&eth;",
+        "ñ" => "&ntilde;",
+        "ò" => "&ograve;",
+        "ó" => "&oacute;",
+        "ô" => "&ocirc;",
+        "õ" => "&otilde;",
+        "ö" => "&ouml;",
+        "÷" => "&divide;",
+        "ø" => "&oslash;",
+        "ù" => "&ugrave;",
+        "ú" => "&uacute;",
+        "û" => "&ucirc;",
+        "ü" => "&uuml;",
+        "ý" => "&yacute;",
+        "þ" => "&thorn;",
+        "ÿ" => "&yuml;"
+    );
 
-	$balise = array("<em>", "</em>", "<sup>", "</sup>", "<br />");
+    // Parcours du tableau pour remplacer les caractères spéciaux
+    foreach ($special_characters as $char => $html_entity) {
+        $str = str_replace($char, $html_entity, $str);
+    }
 
-	if ($str == '')
-		$str = ' ';
+    // Remplacer le caractère "œ" par "oe"
+    $str = str_replace("œ", "oe", $str);
 
-	$texte = str_replace($balise, " ", $str);
-
-	$texte = str_replace("’", "&prime;", $texte);
-	$texte = str_replace("'", "&prime;", $texte);
-	$texte = str_replace("<", "&lt;", $texte);
-	$texte = str_replace(">", "&gt;", $texte);
-	$texte = str_replace(" ", "&nbsp;", $texte);
-	$texte = str_replace("¡", "&iexcl;", $texte);
-	$texte = str_replace("¢", "&cent;", $texte);
-	$texte = str_replace("£", "&pound;", $texte);
-	$texte = str_replace("¤", "&curren;", $texte);
-	$texte = str_replace("¥", "&yen;", $texte);
-	$texte = str_replace("¦", "&brvbar;", $texte);
-	$texte = str_replace("§", "&sect;", $texte);
-	$texte = str_replace("¨", "&uml;", $texte);
-	$texte = str_replace("©", "&copy;", $texte);
-	$texte = str_replace("ª", "&ordf;", $texte);
-	$texte = str_replace("«", "&laquo;", $texte);
-	$texte = str_replace("¬", "&not;", $texte);
-	$texte = str_replace("­", "&shy;", $texte);
-	$texte = str_replace("®", "&reg;", $texte);
-	$texte = str_replace("¯", "&macr;", $texte);
-	$texte = str_replace("°", "&deg;", $texte);
-	$texte = str_replace("±", "&plusmn;", $texte);
-	$texte = str_replace("²", "&sup2;", $texte);
-	$texte = str_replace("³", "&sup3;", $texte);
-	$texte = str_replace("´", "&acute;", $texte);
-	$texte = str_replace("µ", "&micro;", $texte);
-	$texte = str_replace("¶", "&para;", $texte);
-	$texte = str_replace("·", "&middot;", $texte);
-	$texte = str_replace("¸", "&cedil;", $texte);
-	$texte = str_replace("¹", "&sup1;", $texte);
-	$texte = str_replace("º", "&ordm;", $texte);
-	$texte = str_replace("»", "&raquo;", $texte);
-	$texte = str_replace("¼", "&frac14;", $texte);
-	$texte = str_replace("½", "&frac12;", $texte);
-	$texte = str_replace("¾", "&frac34;", $texte);
-	$texte = str_replace("¿", "&iquest;", $texte);
-	$texte = str_replace("À", "&Agrave;", $texte);
-	$texte = str_replace("Á", "&Aacute;", $texte);
-	$texte = str_replace("Â", "&Acirc;", $texte);
-	$texte = str_replace("Ã", "&Atilde;", $texte);
-	$texte = str_replace("Ä", "&Auml;", $texte);
-	$texte = str_replace("Å", "&Aring;", $texte);
-	$texte = str_replace("Æ", "&AElig;", $texte);
-	$texte = str_replace("Ç", "&Ccedil;", $texte);
-	$texte = str_replace("È", "&Egrave;", $texte);
-	$texte = str_replace("É", "&Eacute;", $texte);
-	$texte = str_replace("Ê", "&Ecirc;", $texte);
-	$texte = str_replace("Ë", "&Euml;", $texte);
-	$texte = str_replace("Ì", "&Igrave;", $texte);
-	$texte = str_replace("Í", "&Iacute;", $texte);
-	$texte = str_replace("Î", "&Icirc;", $texte);
-	$texte = str_replace("Ï", "&Iuml;", $texte);
-	$texte = str_replace("Ð", "&ETH;", $texte);
-	$texte = str_replace("Ñ", "&Ntilde;", $texte);
-	$texte = str_replace("Ò", "&Ograve;", $texte);
-	$texte = str_replace("Ó", "&Oacute;", $texte);
-	$texte = str_replace("Ô", "&Ocirc;", $texte);
-	$texte = str_replace("Õ", "&Otilde;", $texte);
-	$texte = str_replace("Ö", "&Ouml;", $texte);
-	$texte = str_replace("×", "&times;", $texte);
-	$texte = str_replace("Ø", "&Oslash;", $texte);
-	$texte = str_replace("Ù", "&Ugrave;", $texte);
-	$texte = str_replace("Ú", "&Uacute;", $texte);
-	$texte = str_replace("Û", "&Ucirc;", $texte);
-	$texte = str_replace("Ü", "&Uuml;", $texte);
-	$texte = str_replace("Ý", "&Yacute;", $texte);
-	$texte = str_replace("Þ", "&THORN;", $texte);
-	$texte = str_replace("ß", "&szlig;", $texte);
-	$texte = str_replace("à", "&agrave;", $texte);
-	$texte = str_replace("á", "&aacute;", $texte);
-	$texte = str_replace("â", "&acirc;", $texte);
-	$texte = str_replace("ã", "&atilde;", $texte);
-	$texte = str_replace("ä", "&auml;", $texte);
-	$texte = str_replace("å", "&aring;", $texte);
-	$texte = str_replace("æ", "&aelig;", $texte);
-	$texte = str_replace("ç", "&ccedil;", $texte);
-	$texte = str_replace("è", "&egrave;", $texte);
-	$texte = str_replace("é", "&eacute;", $texte);
-	$texte = str_replace("ê", "&ecirc;", $texte);
-	$texte = str_replace("ë", "&euml;", $texte);
-	$texte = str_replace("ì", "&igrave;", $texte);
-	$texte = str_replace("í", "&iacute;", $texte);
-	$texte = str_replace("î", "&icirc;", $texte);
-	$texte = str_replace("ï", "&iuml;", $texte);
-	$texte = str_replace("ð", "&eth;", $texte);
-	$texte = str_replace("ñ", "&ntilde;", $texte);
-	$texte = str_replace("ò", "&ograve;", $texte);
-	$texte = str_replace("ó", "&oacute;", $texte);
-	$texte = str_replace("ô", "&ocirc;", $texte);
-	$texte = str_replace("õ", "&otilde;", $texte);
-	$texte = str_replace("ö", "&ouml;", $texte);
-	$texte = str_replace("÷", "&divide;", $texte);
-	$texte = str_replace("ø", "&oslash;", $texte);
-	$texte = str_replace("ù", "&ugrave;", $texte);
-	$texte = str_replace("ú", "&uacute;", $texte);
-	$texte = str_replace("û", "&ucirc;", $texte);
-	$texte = str_replace("ü", "&uuml;", $texte);
-	$texte = str_replace("ý", "&yacute;", $texte);
-	$texte = str_replace("þ", "&thorn;", $texte);
-	$texte = str_replace("ÿ", "&yuml;", $texte);
-	$texte = str_replace("œ", "oe", $texte);
-
-	return ($texte);
+    return $str;
 }
-
 
 function replace_texte_speciaux_parpourcent($str)
 {
@@ -691,7 +688,14 @@ function _getText($key, $encode = 0)
 {
 	global $_TEXT;
 	if (isset($_TEXT[$key])) {
-		return replace_texte_speciaux($_TEXT[$key]);
+
+		if($encode == 0){
+			return replace_texte_speciaux($_TEXT[$key]);
+		}else{
+			return ($_TEXT[$key]);
+		}
+
+		
 	}
 	return "[" . ($encode == 0 ? ($key) : ($key))  . "]";
 }

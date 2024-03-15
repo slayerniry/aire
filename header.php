@@ -2,10 +2,11 @@
 <?php
 // Inclure l'autoloader de Composer
 require_once __DIR__ . '/config.inc.php';
-loadRessource("fr");
+require_once __DIR__ . '/include/session.php';
+
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?=  $_SESSION["l"] ?>">
 
 <head>
     <title><?= _getText("nom.societe") ?></title>

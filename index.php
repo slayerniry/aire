@@ -1,17 +1,24 @@
 <?php require_once "header.php";
 $parametre = new Models\parametre;
+$t_event = new Models\t_event;
 /** code sous domaine  */
 $tabsoustype =   explode("|", $parametre->lireCle("LIST_SOUS_TYPE_EVENT"));
-$cri["param_key"] = "PRESENTATION_TEXT" ;
+$cri["param_key"] = "PRESENTATION_TEXT";
 $dataPresentation = $parametre->lireParCritere($cri);
-$cri["param_key"] = "OBJECTIF_TEXT" ;
+$cri["param_key"] = "OBJECTIF_TEXT";
 $dataObjectif = $parametre->lireParCritere($cri);
+$critereBarner["id_type_event"] = $parametre->lireCle("CODE_TYPE_BARNER");
+
+$tabBarner = $t_event->lireParCritere($critereBarner);
+
+    
+
 $objectif_text = "";
-if(count($dataObjectif)> 0){
-    $objectif_text=$dataObjectif[0]["param_desc"];
+if (count($dataObjectif) > 0) {
+    $objectif_text = $dataObjectif[0]["param_desc"];
 }
-if(count($dataPresentation)> 0){
-    $presentation_text=$dataPresentation[0]["param_desc"];
+if (count($dataPresentation) > 0) {
+    $presentation_text = $dataPresentation[0]["param_desc"];
 }
 foreach ($tabsoustype as $key => $value) {
     $tabsoustypeDeail[] = explode(":", $value);
@@ -26,23 +33,29 @@ $devLib = $tabsoustypeDeail[1][1];
     #divactivite2 {
         display: none;
     }
+
     #divactivite {
         display: block;
     }
+
     .page-link i {
         color: #006633;
         font-size: 38px;
     }
+
     .page-link:hover {
         background-color: #73c17c;
     }
+
     .img-domaine {
         width: 200px;
     }
+
     .img-domaine:hover {
         filter: grayscale(100%);
         transition: filter 0.3s ease;
     }
+
     .btn-see-more {
         font-family: 'Nunito';
         font-weight: bold;
@@ -51,85 +64,105 @@ $devLib = $tabsoustypeDeail[1][1];
         width: fit-content;
         font-size: 38px;
     }
+
     .btn-see-more:hover {
         font-family: 'Nunito';
         background-color: #73c17c;
         color: white;
     }
+
     h1 {
         padding-top: 50px;
         font-size: 38pt;
         color: #006633;
     }
+
     h2 {
         font-size: 28pt;
         color: #663333;
     }
+
     .div-card-text {
         padding-right: 20px;
     }
+
     .card-text {
         font-family: 'Nunito';
         font-size: 14pt;
     }
+
     .title_head {
         padding-top: 40px;
         padding-left: 40px;
         font-size: 48pt;
         color: #006633;
     }
+
     #img-protgerlenvironnement-text {
         font-size: 60pt;
         padding: 50px;
         color: white;
     }
+
     #img-activite-text {
         padding: 10px;
     }
+
     #img-activite-text h2 {
         padding: 10px;
     }
+
     .activite-text p {
         padding: 10px;
         font-family: 'Nunito';
         font-size: 14pt;
         width: 50%;
     }
+
     @media screen and (max-width:1196px) {
         .title_head {
             padding-top: 10px;
             padding-left: 10px;
             font-size: 45px;
         }
+
         .card-text {
             font-size: 14px;
         }
+
         #img-protgerlenvironnement-text {
             font-size: 55pt;
         }
+
         h1 {
             font-size: 25pt;
             color: #006633;
         }
     }
+
     @media screen and (max-width:1024px) {
         #act-precedent .btn {
             width: 10px;
         }
+
         #act-suivant .btn {
             width: 10px;
         }
+
         h2 {
             font-size: 18pt;
         }
+
         .title_head {
             padding-top: 10px;
             padding-left: 10px;
             font-size: 25px;
         }
+
         #img-protgerlenvironnement-text {
             font-size: 30pt;
         }
+
         .activite-text p {
             padding: 2px;
             font-size: 10pt;
@@ -137,51 +170,60 @@ $devLib = $tabsoustypeDeail[1][1];
             height: 100px;
             overflow-y: scroll;
         }
+
         .card-text {
             font-family: 'Nunito';
             font-size: 10pt;
         }
     }
-    @media screen and (max-width:390px) {
+
+    @media screen and (max-width:450px) {
         .title_head {
             padding-top: 0px;
             padding-left: 0px;
             font-size: 20px;
         }
+
         .page-link i {
             color: #006633;
             font-size: 18px;
         }
+
         #img-protgerlenvironnement-text {
             font-size: 25pt;
         }
+
         #divactivite2 {
             display: block;
         }
+
         #divactivite {
             display: none;
         }
+
         .btn-see-more {
             font-size: 18px;
         }
+
         #liste-team .card {
             width: 150px !important;
         }
+
         #div-domaine .card {
             width: 150px !important;
         }
+
         .img-domaine {
             width: 100px;
             cursor: pointer;
         }
+
         .img-domaine:hover {
             width: 100px;
             cursor: pointer;
         }
     }
 </style>
-
-
 <style>
     /* Define the styles for the animated elements */
     .wow {
@@ -194,21 +236,85 @@ $devLib = $tabsoustypeDeail[1][1];
         animation-name: fadeInUp;
     }
 </style>
+<style>
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: #663333;
+        width: 50px;
+        height: 50px;
+        border-radius: 60px;
+        filter: invert(100%);
+    }
 
-<div class="container" id="divaccueil">
+    .carousel-control-next-icon {
+        background-image: url(pages/css/bootstrap-icons-1.11.3/caret-right.svg);
+    }
+
+    .carousel-control-prev-icon {
+        background-image: url(pages/css/bootstrap-icons-1.11.3/caret-left.svg);
+    }
+</style>
+<!--<div class="container" id="divaccueil">
     <div class="row justify-content-center align-items-center g-2" style="position: relative;">
         <img  style="" src="<?= HTTP_IMG ?>pdc.jpg" class="w-100 " alt="">
         <img style="position: absolute; top: 0; left: 0;" src="<?= HTTP_IMG ?>head.png" class="w-100" alt="">
         <div class="position-absolute start-0 top-0" id="">
-            <h1 class="title_head">
+            <h1 class="title_head wow fadeInUp" style="animation-duration:3s; animation-delay:1s;" >
                 <p><?= _getText("titre.haut") ?></p>
                 <p><?= _getText("titre.bat") ?></p>
             </h1>
         </div>
-        <!--<div class="position-absolute start-50 bottom-0" style="padding: 2%;">
-<button class="btn btn-see-more">See more</button>
-</div>-->
     </div>
+</div>-->
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <?php
+
+        
+
+        $active = "";
+        for ($i = 0; $i < count($tabBarner); $i++) {
+            if ($i == 0) {
+                $active = "active";
+            } else {
+                $active = "";
+            }
+        ?>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= $i ?>" class="<?= $active ?>" aria-current="true" aria-label="Slide 1"></button>
+        <?php  } ?>
+    </div>
+    <div class="carousel-inner">
+        <?php
+        $active = "";
+        for ($i = 0; $i < count($tabBarner); $i++) {
+            if ($i == 0) {
+                $active = "active";
+            } else {
+                $active = "";
+            }
+        ?>
+            <div class="carousel-item <?= $active ?>">
+                <!--<img src="<?= HTTP_IMG ?>pdc.jpg" class="d-block w-100" alt="...">-->
+
+                <?=  $tabBarner[$i]["photo_event"]  ?>
+
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="display-2 text-white ">  <?=  $tabBarner[$i]["titre"]  ?></h1>
+                    <h2 class="text-light">
+                    <?=  $tabBarner[$i]["contenu"]  ?>
+                    </h2>
+                </div>
+            </div>
+        <?php  } ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
 <div class="container" id="divapropos">
     <div class="row">
@@ -217,15 +323,15 @@ $devLib = $tabsoustypeDeail[1][1];
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="card h-100">
-                <div class="card-body">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+            <div class="card h-100 ">
+                <div class="card-body ">
                     <div class="row">
                         <div>
                             <h2><?= _getText("presentation")  ?></h2>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row  ">
                         <div class="col-md-8">
                             <p class="card-text text-justify mb-auto" id="txtpresentation">
                                 <!-- Placeholder text goes here -->
@@ -233,7 +339,7 @@ $devLib = $tabsoustypeDeail[1][1];
                             <input type="hidden" id="txtpresentation_input" value="<?= $presentation_text ?>">
                         </div>
                         <div class="col-md-4">
-                            <img  style="border: none;" src="<?= HTTP_IMG ?>presentation.gif" class="img-thumbnail " alt="Presentation Image">
+                            <img style="border: none;" src="<?= HTTP_IMG ?>presentation.gif" class="img-thumbnail " alt="Presentation Image">
                         </div>
                     </div>
                 </div>
@@ -302,11 +408,8 @@ $devLib = $tabsoustypeDeail[1][1];
         </div>
     </div>!-->
     <div class="row">
-        <div class="col" style="background-image:url('<?= HTTP_IMG ?>protgerlenvironnement.jpg');">
-            
-
-            <div class="start-0 top-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;" id="img-protgerlenvironnement-text" >
-
+        <div class="col " style="background-image:url('<?= HTTP_IMG ?>protgerlenvironnement.jpg');">
+            <div class="start-0 top-0 wow fadeInUp" style="animation-duration:3s; animation-delay:1s;" id="img-protgerlenvironnement-text">
                 <?= _getText("text.vert.haut") ?><br><?= _getText("text.vert.bas") ?>
             </div>
         </div>
@@ -366,7 +469,7 @@ $devLib = $tabsoustypeDeail[1][1];
 </div>
 <div class="container" id="divactivite2">
     <div class="row">
-        <div class="col">
+        <div class="col ">
             <h1><?= _getText("activites") ?></h1>
         </div>
     </div>

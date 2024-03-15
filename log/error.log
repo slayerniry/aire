@@ -14,3 +14,28 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\laragon\www\aire\ajax\activite\afficheactivitesuivant.php on line 11
+[15-Mar-2024 08:42:41 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Undefined constant "RP_MODELS" in C:\laragon\www\aire\admin\pages\header.php:5
+Stack trace:
+#0 C:\laragon\www\aire\admin\pages\index.php(2): require_once()
+#1 {main}
+  thrown in C:\laragon\www\aire\admin\pages\header.php on line 5
+[15-Mar-2024 09:55:16 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Undefined constant "RP_MODELS" in C:\laragon\www\aire\admin\pages\creation\formt_event.php:6
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\admin\pages\creation\formt_event.php on line 6
+[15-Mar-2024 09:55:30 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Undefined constant "RP_MODELS" in C:\laragon\www\aire\admin\pages\creation\formt_event.php:6
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\admin\pages\creation\formt_event.php on line 6
+[15-Mar-2024 11:27:56 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Failed opening required 'C:/laragon/www/aire/session.php' (include_path='.;C:/laragon/etc/php/pear') in C:\laragon\www\aire\admin\pages\parametrage\formreferentielle.php:4
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\admin\pages\parametrage\formreferentielle.php on line 4
+[15-Mar-2024 11:29:38 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Failed opening required 'C:/laragon/www/aire/session.php' (include_path='.;C:/laragon/etc/php/pear') in C:\laragon\www\aire\admin\pages\admin\formutilisateur.php:5
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\admin\pages\admin\formutilisateur.php on line 5
+[15-Mar-2024 11:31:04 Africa/Nairobi] PHP Fatal error:  Uncaught Error: Failed opening required 'C:/laragon/www/aire/session.php' (include_path='.;C:/laragon/etc/php/pear') in C:\laragon\www\aire\admin\pages\admin\formparametre.php:4
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\aire\admin\pages\admin\formparametre.php on line 4
