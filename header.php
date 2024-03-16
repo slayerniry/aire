@@ -76,7 +76,7 @@ require_once __DIR__ . '/include/session.php';
 <body>
     <header>
         <nav class="navbar navbar-expand-md nav-link custom-navbar navbar-light bg-light">
-            <div class="container">
+            <div class="container" id="divaccueil">
                 <!-- Replace "your-logo.png" with the path to your logo -->
                 <a class="navbar-brand" href="#">
                     <img style="height: 100px;width:100px;" src="<?= HTTP_IMG ?>logo.jpg" alt="">
